@@ -1,0 +1,12 @@
+﻿@"
+__pycache__/
+*.pyc
+allure-results/
+allure-report/
+.pytest_cache/
+venv/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+"@ | Out-File -FilePath .gitignore -Encoding utf8
