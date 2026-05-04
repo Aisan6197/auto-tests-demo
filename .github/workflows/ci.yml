@@ -34,3 +34,21 @@ jobs:
       with:
         name: allure-results
         path: allure-results
+
+    - name: Install Allure commandline
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y allure
+
+    - name: Generate Allure Report
+      if: always()
+      run: |
+        allure generate allure-results -o allure-report --clean
+
+    - name: Deploy to GitHub Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./allure-report
+        publish_branch: gh-pages
