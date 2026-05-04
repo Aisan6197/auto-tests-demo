@@ -23,11 +23,20 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Set up Node.js (for Allure)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install allure-pytest
+
+    - name: Install Allure commandline
+      run: |
+        npm install -g allure-commandline
 
     - name: Run tests with Allure
       run: |
@@ -39,11 +48,6 @@ jobs:
       with:
         name: allure-results
         path: allure-results
-
-    - name: Install Allure commandline
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y allure
 
     - name: Generate Allure Report
       if: always()
